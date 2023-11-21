@@ -20,38 +20,45 @@ public class ModifyMemberController extends HttpServlet {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") == null) {
 			// 로그인이 되어 있는 상태
-			// redirect할 컨트롤러 url
+			// 리다이렉트 할 컨트롤러 url
 			response.sendRedirect(request.getContextPath()+ "/member/memberHome");
 			return;
 		}
 		request.getRequestDispatcher("/WEB-INF/view/member/modifyPwMember.jsp").forward(request, response);
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// session 유효성 검사
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") == null) {
 			// 로그인이 되어 있는 상태
-			// redirect할 컨트롤러 url
+			// 리다이렉트 할 컨트롤러 url
 			response.sendRedirect(request.getContextPath()+ "/member/memberHome");
 			return;
 		}
 		
-		request.setCharacterEncoding("utf-8");
-		
 		Member member = (Member)session.getAttribute("loginMember");	
 		
-		int memberNo = member.getMemberNo();
-		
-		String memberId = request.getParameter("memberId");
-		String MemberPw = request.getParameter("beforePw");
-		String MemberPw2 = request.getParameter("afterPw");
+		int memberNo = member.getMemberNo();		
+		String MemberPw = request.getParameter("memberPw");
+		String MemberPw2 = request.getParameter("memberPw2");
 		
 		MemberDao memberDao = new MemberDao();
-		int row = memberDao.updatePw(MemberPw , MemberPw2 , memberId);
-		System.out.println(row);
 		
-		session.invalidate();
-		response.sendRedirect(request.getContextPath()+"/member/loginMember");
+		try {
+			
+			int row = memberDao.modifyMemberPw(memberNo, MemberPw, MemberPw2);
+			System.out.println(row);
+			session.invalidate();
+			response.sendRedirect(request.getContextPath()+"/member/loginMember");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 }
