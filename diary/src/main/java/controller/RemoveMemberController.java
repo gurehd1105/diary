@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,43 +14,39 @@ import vo.Member;
 @WebServlet("/member/removeMember")
 public class RemoveMemberController extends HttpServlet {
 
+	// remove폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 유효성 검사
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {  
-			// 로그인이 되어 있는 상태
-			// redirect할 컨트롤러 url
-			response.sendRedirect(request.getContextPath()+ "/member/memberHome");
+		if(session.getAttribute("loginMember")== null) {  //로그인이 되어 있지 않다면 로그인폼으로 이동
+			response.sendRedirect(request.getContextPath()+"/member/loginMember");
 			return;
 		}
+		// view forward
 		request.getRequestDispatcher("/WEB-INF/view/member/removeMember.jsp").forward(request, response);
+
 	}
 
+	// remove 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			// 로그인이 되어 있는 상태
-			// redirect할 컨트롤러 url
-			response.sendRedirect(request.getContextPath()+ "/member/loginMember");
+		if(session.getAttribute("loginMember")== null) {
+			response.sendRedirect(request.getContextPath()+"/member/loginMember");
 			return;
 		}
-				
-		Member member = (Member)session.getAttribute("loginMember");			
-		int memberNo = member.getMemberNo();
-		String memberPw	 = request.getParameter("memberPw");
-		
-		MemberDao memberDao = new MemberDao();
-		int row = memberDao.removeMember(memberNo, memberPw);
-		System.out.println(row);
-		
-		if(row != 1) {
-			response.sendRedirect(request.getContextPath()+"/member/memberHome");
-			return;
-		}	
-		session.invalidate();
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	int memberNo = loginMember.getMemberNo();
+	String memberPw = request.getParameter("memberPw");
+	
+	MemberDao memberdao = new MemberDao();
+	int row = memberdao.removeMember(memberNo, memberPw);
+	System.out.println(row);
+	
+	if(row != 1) {
+		response.sendRedirect(request.getContextPath()+"/member/memberHome");
+		return;
+	}	session.invalidate();
 		response.sendRedirect(request.getContextPath()+"/member/loginMember");
-				
-		}
-
+			
+	}
 
 }

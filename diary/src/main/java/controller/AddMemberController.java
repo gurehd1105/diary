@@ -19,7 +19,7 @@ public class AddMemberController extends HttpServlet {
 		// session 유효성 검사
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") != null) {
-			// 로그인이 안 되어 있는 상태
+			// 로그인이 되어 있는 상태
 			// 리다이렉트 할 컨트롤러 url
 			response.sendRedirect(request.getContextPath()+"/member/memberHome");
 			return;

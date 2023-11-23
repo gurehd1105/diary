@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 	<h1>로그인</h1>
-	<form id="loginForm" method="post" action="<%=request.getContextPath()%>/member/loginMember">
+	<form id="loginForm" method="post" action="${pageContext.request.contextPath}/member/loginMember">
 	  <table border="1">
 	  	<tr>
 		  <td>memberId</td>

@@ -11,54 +11,47 @@ import javax.servlet.http.HttpSession;
 import dao.MemberDao;
 import vo.Member;
 
-@WebServlet("/member/modifyPwMember")
+@WebServlet("/member/modifyMemberPw")
 public class ModifyMemberController extends HttpServlet {
-       
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// session 유효성 검사
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
+		if(session.getAttribute("loginMember") ==null) {
 			// 로그인이 되어 있는 상태
 			// 리다이렉트 할 컨트롤러 url
-			response.sendRedirect(request.getContextPath()+ "/member/memberHome");
+			response.sendRedirect(request.getContextPath()+"/member/memberHome");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/member/modifyPwMember.jsp").forward(request, response);
+		// view forward
+		request.getRequestDispatcher("/WEB-INF/view/member/modifyMemberPw.jsp").forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		// session 유효성 검사
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
+		if(session.getAttribute("loginMember") ==null) {
 			// 로그인이 되어 있는 상태
 			// 리다이렉트 할 컨트롤러 url
-			response.sendRedirect(request.getContextPath()+ "/member/memberHome");
-			return;
-		}
+				response.sendRedirect(request.getContextPath()+"/member/memberHome");
+				return;
+			}
+		Member member = (Member)session.getAttribute("loginMember");
 		
-		Member member = (Member)session.getAttribute("loginMember");	
+		int memberNo = member.getMemberNo();
 		
-		int memberNo = member.getMemberNo();		
-		String MemberPw = request.getParameter("memberPw");
-		String MemberPw2 = request.getParameter("memberPw2");
+		String memberPw = request.getParameter("memberPw");
+		String memberPw2 = request.getParameter("memberPw2"); 
 		
-		MemberDao memberDao = new MemberDao();
-		
+		MemberDao memberdao = new MemberDao();
 		try {
-			
-			int row = memberDao.modifyMemberPw(memberNo, MemberPw, MemberPw2);
-			System.out.println(row);
+			int row = memberdao.modifyMemberPw(memberNo, memberPw, memberPw2);
 			session.invalidate();
 			response.sendRedirect(request.getContextPath()+"/member/loginMember");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 	}
 
 }
