@@ -21,6 +21,9 @@ import vo.Notice;
 public class MemberHomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+	
+		
 		// session 유효성 검사
 	
 		HttpSession session = request.getSession();
@@ -70,9 +73,7 @@ public class MemberHomeController extends HttpServlet {
 		
 		
 		// notice 모델
-		
-		
-		
+				
 		NoticeDao noticeDao = new NoticeDao();		
 		List<Notice> noticeList 
 			= noticeDao.selectNoticeList();

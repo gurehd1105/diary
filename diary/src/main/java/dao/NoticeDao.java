@@ -66,13 +66,63 @@ public class NoticeDao {
 	
 	//member_level > 0 and pw일치
 	public int updateNotice(Notice notice) {
+		
 		return 0;
 
 	}
+		
 	
+	public Notice noticeOne(int noticeNo) {
+		//커넥션 풀
+				DataSource ds = null;
+				Connection conn = null;
+				PreparedStatement stmt = null;
+				ResultSet rs = null;
+				Notice n = null;
+						
+				try {
+					Context context = new InitialContext();
+					ds = (DataSource) context.lookup("java:comp/env/jdbc/diary");
+					conn = ds.getConnection();
+					System.out.println(conn + "<--conn");
+					String sql = "SELECT notice_no noticeNo, member_id memberId, notice_title noticeTitle, notice_content noticeContent, createdate, updatedate FROM notice WHERE notice_no = ?";
+							
+					stmt = conn.prepareStatement(sql);
+					stmt.setInt(1, noticeNo);	
+				
+					rs = stmt.executeQuery();
+					if(rs.next()) {
+						n = new Notice();
+						n.setNoticeNo(rs.getInt("noticeNo"));
+						n.setMemberId(rs.getString("memberId"));
+						n.setNoticeTitle(rs.getString("noticeTitle"));
+						n.setNoticeContent(rs.getString("noticeContent"));
+						n.setCreatedate(rs.getString("createdate"));
+						n.setUpdatedate(rs.getString("Updatedate"));
+			
+					}
 	
-	public Notice noticeOne(int noticeNO) {
-		return null;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					try {
+						if (rs != null) {
+			                rs.close();
+			            }
+						if (conn != null) {
+			                conn.close();
+			            }
+						if (stmt != null) {
+			                stmt.close();
+			            }
+			           
+					} catch (SQLException e) {
+				
+						e.printStackTrace();
+					}
+				}
+				return n;
+					
 	}
 	
 	

@@ -9,7 +9,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>로그인</h1>
+	<h1>로그인</h1>	
 	<form id="loginForm" method="post" action="${pageContext.request.contextPath}/member/loginMember">
 	  <table border="1">
 	  	<tr>

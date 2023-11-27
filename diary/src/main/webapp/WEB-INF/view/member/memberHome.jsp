@@ -10,6 +10,8 @@
 </script>
 </head>
 <body>
+	
+	
 	<h1>안녕하세요!! ${loginMember.memberId}님</h1>
 	<div>
  		<a href="${pageContext.request.contextPath}/member/logoutMember">로그아웃</a>
@@ -27,6 +29,7 @@
  	
  	<h1>공지사항 리스트</h1>	
  	<div>
+ 
  	 <a href="${pageContext.request.contextPath}/notice/insertNotice">공지사항 추가</a>
  		<table border="1">
  			
@@ -41,7 +44,7 @@
  				<tr>
  					<td>${n.noticeNo}</td>
  					<td>
- 						<a href="${pageContext.request.contextPath}/notice/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a>
+ 						<a href="${pageContext.request.contextPath}/notice/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a>						
  					</td>
  					<td>${n.createdate}</td>				
  					<td>

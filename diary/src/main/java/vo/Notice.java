@@ -8,6 +8,7 @@ public class Notice {
 	private String noticeContent;
 	private String createdate;
 	private String updatedate;
+	
 	public int getNoticeNo() {
 		return noticeNo;
 	}
