@@ -21,8 +21,8 @@
 		${calendarMap.targetMonth + 1}월	
 	</div>
 	<div>
-		<a href="">이전달</a>
-		<a href="">다음달</a>
+		<a href="${pageContext.request.contextPath}/home?targetMonth=${calendarMap.targetMonth-1}&targetYear=${calendarMap.targetYear}">이전달</a>
+		<a href="${pageContext.request.contextPath}/home?targetMonth=${calendarMap.targetMonth+1}&targetYear=${calendarMap.targetYear}">다음달</a>
 	</div>
 	<table border="1">
 		<tr>
@@ -33,7 +33,7 @@
 					&nbsp; 
 					</c:if> 				
 					<c:if test="${!(d < 1 || d >calendarMap.lastDate)}">
-						<a href="">${d}</a>
+						<a href="${pageContext.request.contextPath}/schedule/scheduleOne?targetY=${targetY}&targetM=${targetM-1}&targetD=${d}">${d}</a>
 					</c:if>
 					<!--  한 행에 7열씩 출력하도록 행(<tr></tr>)추가-->
 					<c:if test="${i < calendarMap.totalTd && i % 7 == 0}">

@@ -1,5 +1,6 @@
 package com.example.diary.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,14 +34,24 @@ public class HomeController {
 			return "redirect:/login";
 		}
 		
-	
+		// 캘린더 출력
 		Map<String, Object> calendarMap = calendarService.getCalendar(targetYear, targetMonth);
 		model.addAttribute("calendarMap", calendarMap);
 		
-//		List<Schedule> list = scheduleService.getScheduleListByMonth(null, 0);
-//		model.addAttribute("list", list);
-		
-		return "home";
+		 Map<String , Object> paramMap = new HashMap<>();   
+	      paramMap.put("memberId", loginMember.getMemberId());
+	      
+	      paramMap.put("targetYear", session.getAttribute("targetYear"));
+	      paramMap.put("targetMonth", session.getAttribute("targetMonth"));   
+	      System.out.println(paramMap + "<-- paramMap");
+	      
+	      List<Map<String , Object>> scheduleList = scheduleService.getScheduleListByMonth(paramMap);
+	      System.out.println(scheduleList + "<-- scheduleList");
+	      model.addAttribute("scheduleList", scheduleList);                        // 일자별 스케쥴 개 수 , 스케쥴메모 앞 5글자 미리보기 완
+	   
+	      
+	      
+	      return "home";
+	   }
 	}
-}
 
