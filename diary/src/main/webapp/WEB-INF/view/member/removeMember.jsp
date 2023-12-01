@@ -1,33 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js">
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-	<h1>회원탈퇴</h1>
-	<form id="updatePw" method="post" action="<%=request.getContextPath()%>/member/removeMember">
-	<table border="1">
-	<tr>
-		<td>비밀번호입력</td>
-		<td><input type="password" id="memberPw" name="memberPw"></td>
-	</tr>
-	</table>
-	<button id="rvBtn">탈퇴</button>
-	</form>
+   <form action="${contextPath}/removeMember" method="post" class="removeMemberAct">
+      <div>탈퇴를 위해 PW를 입력하세요</div>
+      <div><input type="password" name="memberPw" class="memberPw"></div>
+         <button type="button" class="removeMemberBtn">탈퇴하기</button>
+   </form>
 </body>
 <script type="text/javascript">
-	$('#rvBtn').click(function(){
-		if($('#memberPw').val().length<1){
-			alert('비밀번호를 입력해주세요');
-		} else {
-			$('#memberPw').submit();
-		}
-	})
-
+   $('.removeMemberBtn').click(function() {
+      if($('.memberPw').val().length<1){
+         alert('PW를 입력하세요');
+         return;
+      } else {
+         $('.removeMemberAct').submit();
+      }
+   });
 </script>
 </html>

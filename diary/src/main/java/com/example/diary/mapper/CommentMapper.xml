@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.diary.mapper.CommentMapper">
+	<!-- comment 페이지 -->
+	<select id="selectCommentList" parameterType="java.util.Map"
+         resultType="com.example.diary.vo.Comment">
+      SELECT 
+            comment_no commentNo,
+            notice_no noticeNo,
+            member_id memberId,
+            comment_content commentContent,
+            createdate           
+      FROM comment
+      ORDER BY comment_no desc
+      LIMIT #{beginRow} , #{rowPerPage}
+   </select>
+   	
+	<select id="commentCount"
+         parameterType="com.example.diary.vo.Comment"
+         resultType="Integer">
+      SELECT 
+            count(comment_no)
+      FROM comment
+   </select>	
+
+</mapper>
