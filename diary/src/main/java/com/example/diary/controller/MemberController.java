@@ -19,17 +19,19 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	// 홈 화면
+	/*
 	@GetMapping("/home")
 	public String home(Model model, HttpSession session) {
 		
 		Member loginMember = (Member) session.getAttribute("loginMember");
+				
 		if(loginMember == null) {
 			return "redirect:/login";
 		}
-		
+	
 		return "home";
 	}
-	
+	*/
 	// 로그아웃
 	   @GetMapping("/logout")
 	   public String logout(HttpSession session) {

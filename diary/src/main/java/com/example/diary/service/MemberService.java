@@ -15,8 +15,8 @@ public class MemberService {
 		
 	public Member login(Member paramMember) {
 		
-		Member resultMember = memberMapper.login(paramMember);
-		return resultMember;
+		Member loginMember = memberMapper.login(paramMember);
+		return loginMember;
 	}
 	
 	// 회원가입
