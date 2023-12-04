@@ -1,52 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.diary.mapper.ScheduleMapper">
-	
-	
-	
-	<!-- 스케줄 일정 갯수 표시 -->
-	
-	<select id="selectScheduleListByMonth" parameterType="java.util.Map"
+   <select id="selectScheduleListByMonth" parameterType="java.util.Map"
             resultType="java.util.Map">
       SELECT 
-            day(SCHEDULE_date) AS day, 
-            COUNT(*) AS cnt, 
-            GROUP_CONCAT(substr(SCHEDULE_memo,1,5)) AS memo
-            FROM SCHEDULE
-            WHERE member_id = #{memberId}
-            AND YEAR(schedule_date) = #{targetYear}
-            AND MONTH(schedule_date) = #{targetMonth} +1
-            GROUP BY SCHEDULE_date
-            ORDER BY SCHEDULE_date ASC
+            day(schedule_date) as day, 
+            COUNT(*) as cnt, 
+            GROUP_CONCAT(substr(schedule_memo,1,5)) as memo
+        FROM schedule
+       WHERE member_id = #{memberId}
+         AND YEAR(schedule_date) = #{targetYear}
+         AND MONTH(schedule_date) = #{targetMonth} +1
+       GROUP BY schedule_date
+       ORDER BY schedule_date ASC
    </select>
-
-	
-	
-	
-	
-	<!-- 일별 스케줄 상세내용  -->
-	<select id="selectSchduleListByDay" parameterType="java.util.Map"
-    							resultType="com.example.diary.vo.Schedule">       
-         SELECT 
-				schedule_no scheduleNo, 
+  
+  	<select id="selectScheduleListByDay" parameterType="com.example.diary.vo.Schedule"
+            resultType="com.example.diary.vo.Schedule">
+      SELECT 
+      		 schedule_no scheduleNo, 
 				schedule_date scheduleDate,
 				schedule_memo scheduleMemo,
 				createdate
-		   FROM schedule
-		  WHERE member_id = #{memberId}
-			AND YEAR(schedule_date) = #{YEAR}
-			AND MONTH(schedule_date) = #{MONTH}
-			AND DAY(schedule_date) = #{DAY}    
-         </select>
-
-
-
-
-
-
-
+	    FROM schedule
+	   WHERE member_id = #{memberId}
+		 AND YEAR(schedule_date) = #{targetYear}
+		 AND MONTH(schedule_date) = #{targetMonth}+1
+		 AND DAY(schedule_date) = #{targetDay}    
+  
+  	</select>
+   
 
 
 
 
 </mapper>
+
+

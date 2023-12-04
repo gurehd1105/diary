@@ -7,10 +7,12 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 @Transactional
 public class CalendarService {
-	public Map<String, Object> getCalendar(Integer targetYear, Integer targetMonth) {
+	public Map<String, Object> getCalendar(Integer targetYear, Integer targetMonth, HttpSession session) {
 
 		// 타겟 월의 1일
 		Calendar firstDay = Calendar.getInstance();
@@ -45,6 +47,9 @@ public class CalendarService {
 		resultMap.put("totalTd", totalTd);
 		
 		System.out.println(resultMap);
+		
+		session.setAttribute("targetYear", targetYear);
+		session.setAttribute("targetMonth", targetMonth);	
 		
 		return resultMap;
 	}
