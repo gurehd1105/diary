@@ -105,13 +105,7 @@ public class NoticeController {
 		Notice noticeOne = noticeService.selectNoticeOne(notice);
 		model.addAttribute("noticeOne", noticeOne);
 		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		return "notice/noticeOne";
 	}

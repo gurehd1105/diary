@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.diary.mapper.ScheduleMapper">
+	
+	<select id="selectScheduleListByDate"
+			parameterType="java.util.Map"
+			resultType="com.example.diary.vo.Schedule">
+		SELECT 	
+			schedule_no scheduleNo,
+			schedule_date scheduleDate,
+			schedule_memo scheduleMemo 
+		FROM schedule
+		<where>
+			<choose>
+				<when test = "year != null and month == null and day == null">
+					YEAR(schedule_date) = #{year}
+				</when>
+				<when test = "year != null and month != null and day == null">
+					YEAR(schedule_date) = #{year}				
+					AND MONTH(schedule_date) = #{month}
+				</when>
+				<when test = "year != null and month != null and day != null">
+					YEAR(schedule_date) = #{year}				
+					AND MONTH(schedule_date) = #{month}
+					AND DAY(schedule_date) = #{day}
+				</when>
+			</choose>
+		</where>
+			LIMIT 0, 30
+	</select>
+	
+	<select id="selectScheduleDateMaxYear" resultType="Integer">
+		SELECT MAX(YEAR(schedule_date)) 
+		FROM schedule
+	</select>
+	<select id="selectScheduleDateMinYear" resultType="Integer">
+		SELECT MIN(YEAR(schedule_date)) 
+		FROM schedule
+	</select>
+
+
+<!--  
+   <select id="selectScheduleListByWord" parameterType="String"
+   		   resultType="com.example.diary.vo.Schedule">
+   		SELECT 
+   			   schedule_date scheduleDate,
+   			   schedule_no scheduleNo,
+   			   schedule_memo scheduleMemo
+		  FROM schedule
+		  <where>
+		  	<if test="word != null and word != ''">
+   		 	  schedule_memo LIKE CONCAT('%', #{word}, '%')
+   		  	</if>
+   		  </where>
+   		  LIMIT 0,10
+   </select>-->
+   
+   
+   
+   
+   <!-- 홈화면 캘린더 및 스케출 출력  -->
    <select id="selectScheduleListByMonth" parameterType="java.util.Map"
             resultType="java.util.Map">
       SELECT 
@@ -14,7 +72,9 @@
        GROUP BY schedule_date
        ORDER BY schedule_date ASC
    </select>
-  
+   
+
+  	<!-- 스케줄 상세보기 -->
   	<select id="selectScheduleListByDay" parameterType="com.example.diary.vo.Schedule"
             resultType="com.example.diary.vo.Schedule">
       SELECT 
@@ -24,12 +84,23 @@
 				createdate
 	    FROM schedule
 	   WHERE member_id = #{memberId}
+		 AND schedule_no = #{scheduleNo} 
 		 AND YEAR(schedule_date) = #{targetYear}
-		 AND MONTH(schedule_date) = #{targetMonth}+1
-		 AND DAY(schedule_date) = #{targetDay}    
-  
+         AND MONTH(schedule_date) = #{targetMonth} +1  
+  		 AND DAY(schedule_date) = #{targetDay}
   	</select>
-   
+  	
+  	<!-- 상세보기 리스트 -->
+   <select id="selectScheduleList" parameterType="java.util.Map"
+           resultType="com.example.diary.vo.Schedule">
+      SELECT 
+      		 schedule_no scheduleNo, 
+				schedule_date scheduleDate,
+				schedule_memo scheduleMemo,
+				createdate
+	    FROM schedule
+
+   </select>
 
 
 

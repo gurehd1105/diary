@@ -44,7 +44,7 @@
                   &nbsp;
                </c:if>
                <c:if test="${!(d < 1 || d> calendarMap.lastDate)}">
-                  <a href="${contextPath}/scheduleOne">${d}</a>
+                  <a href="${contextPath}/scheduleByDay?targetY=${targetY}&targetM=${targetM-1}&targetD=${d}">${d}</a>
                <c:forEach var="s" items="${scheduleList}">
                   <c:if test="${d == s.day}">
                  <div>${s.cnt}</div> 

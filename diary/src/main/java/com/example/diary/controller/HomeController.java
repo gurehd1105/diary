@@ -52,10 +52,8 @@ public class HomeController {
       List<Map<String , Object>> scheduleList = scheduleService.getScheduleListByMonth(paramMap);
       System.out.println(scheduleList + "<-- scheduleList");
       model.addAttribute("scheduleList", scheduleList);                       
-   
-      
-      
-      
+
       return "home";
    }
+   
 }
