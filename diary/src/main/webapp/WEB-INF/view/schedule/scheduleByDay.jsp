@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,18 @@
 	<h1>스케줄 상세보기</h1>
 		<table border="1">
 			<tr>
-				<th>일자</th>
-				<th>메모</th>
-				<th>일짜</th>
-				<th>일짜</th>
+				<td>일자</td>
+				<td>메모</td>
 			</tr>
+		
+			<tr>
+				<c:forEach var="m" items="${list}">				
+					<td>${m.scheduleDate}</td>
+					<td>${m.scheduleMemo}</td>						
+				</c:forEach>
+		    </tr>	
+		
+		
 		</table>
 </body>
 </html>

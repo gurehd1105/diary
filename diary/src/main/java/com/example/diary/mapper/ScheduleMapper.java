@@ -20,17 +20,14 @@ public interface ScheduleMapper {
 	//스케줄 글자 검색
 	List<Schedule> selectScheduleListByWord(String word);	
 	int scheduleListByWordCount(); 
-	
-
-	
+		
     // 달력 출력
     List<Map<String,Object>> selectScheduleListByMonth(Map<String, Object> paramMap);
    
-    // 스케줄 상세보기출력
-    Schedule selectScheduleListByDay(Schedule schedule);
+    // 스케줄 상세보기 리스트  
+    List<Schedule> selectScheduleListByDay(Map<String, Object> paramMap);
    
-    // 상세보기 스케줄 리스트
-    List<Schedule> selectScheduleList(Map<String, Object> paramMap);
+
     
    
    

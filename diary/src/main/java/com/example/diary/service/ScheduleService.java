@@ -63,7 +63,7 @@ public class ScheduleService {
 	}
 
 
-   
+   	/*
    		// 스케줄 글자 검색
    		public List<Schedule> getScheduleListByWord(String word){
    			List<Schedule> list = null;
@@ -73,6 +73,7 @@ public class ScheduleService {
    			return list;
    			
    		}
+   */
    
    // 달력 출력
    public List<Map<String, Object>> getScheduleListByMonth(Map<String, Object> paramMap) {      
@@ -83,23 +84,14 @@ public class ScheduleService {
     }
       
    // 스케줄 상세보기
-   public Schedule selectScheduleByDay(Schedule paramSchedule) {
-	 
-	   Schedule resultSchedule = scheduleMapper.selectScheduleListByDay(paramSchedule);   
+   public List<Schedule> getScheduleListByDay(Map<String, Object> paramMap) {
+	   List<Schedule> resultSchedule = new ArrayList<>();
+	   resultSchedule = scheduleMapper.selectScheduleListByDay(paramMap);
 	   return resultSchedule;
 	   
+	   
+	   
    }
-   // 상세보기 리스트
-   public List<Schedule> selectScheduleList(Map<String, Object> ParamSchedule){
-	  
-	   List<Schedule> resultSchedule = scheduleMapper.selectScheduleList(ParamSchedule);	   	   
-	   return resultSchedule;
-	      
-   }
-    
      
-      
-      
-      
   
 }
