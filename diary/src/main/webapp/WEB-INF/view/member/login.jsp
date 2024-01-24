@@ -28,11 +28,11 @@
 				<table class="mb-3 mt-3">
 					<tr>
 						<td>아이디</td>
-						<td><input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디를 입력하세요"></td>
+						<td><input type="text" class="form-control" value="goodee" id="memberId" name="memberId" placeholder="아이디를 입력하세요"></td>
 					</tr>
 					<tr>
 						<td>비밀번호</td>
-						<td><input type="password" class="form-control" id="memberPw" name="memberPw" placeholder="비밀번호를 입력하세요"></td>
+						<td><input type="password" class="form-control" value="1111" id="memberPw" name="memberPw" placeholder="비밀번호를 입력하세요"></td>
 					</tr>						
 				</table>
 				<br>

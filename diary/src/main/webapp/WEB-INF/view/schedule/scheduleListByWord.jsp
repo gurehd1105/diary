@@ -19,17 +19,10 @@
 		<c:forEach var="s" items="${list}">
 			<tr>
 				<td>${s.scheduleNo}</td>
-				<td>${s.scheduleMemo}</td>
-			
+				<td>${s.scheduleMemo}</td>			
 			</tr>	
 		</c:forEach>
 	</table>
-		<div>
-			<form action="${pageContext.request.contextPath}/scheduleListByWord" method="get">
-			
-				<input type="text" name="word">
-				<button type="submit">검색</button>
-			</form>
-		</div>
+		
 </body>
 </html>

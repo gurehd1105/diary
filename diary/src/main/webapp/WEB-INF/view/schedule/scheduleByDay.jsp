@@ -14,15 +14,12 @@
 				<td>일자</td>
 				<td>메모</td>
 			</tr>
-		
-			<tr>
-				<c:forEach var="m" items="${list}">				
-					<td>${m.scheduleDate}</td>
-					<td>${m.scheduleMemo}</td>						
-				</c:forEach>
-		    </tr>	
-		
-		
+		   <c:forEach var="m" items="${list}">	
+			   <tr>			
+				   <td>${m.scheduleDate}</td>
+				   <td>${m.scheduleMemo}</td>		
+			   </tr>				
+		   </c:forEach>		    	
 		</table>
 </body>
 </html>

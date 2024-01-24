@@ -18,20 +18,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	// 홈 화면
-	/*
-	@GetMapping("/home")
-	public String home(Model model, HttpSession session) {
-		
-		Member loginMember = (Member) session.getAttribute("loginMember");
-				
-		if(loginMember == null) {
-			return "redirect:/login";
-		}
 	
-		return "home";
-	}
-	*/
 	// 로그아웃
 	   @GetMapping("/logout")
 	   public String logout(HttpSession session) {
@@ -39,8 +26,6 @@ public class MemberController {
 	      return "member/login";
 	      
 	   }
-
-
 	// 회원가입 폼
 	@GetMapping("/addMember")
 	public String addMember() {
@@ -71,6 +56,9 @@ public class MemberController {
 		// 로그인 액션
 		@PostMapping("/login")
 		public String login(HttpSession session, Member paramMember) {
+			
+			// 나중에 지움
+			
 			Member loginMember = memberService.login(paramMember);
 			if(loginMember == null) {
 				//로그인 실패

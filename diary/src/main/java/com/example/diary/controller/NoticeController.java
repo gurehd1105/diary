@@ -95,32 +95,21 @@ public class NoticeController {
 		return "notice/noticeList";
 	}
 	
-	
-	
-	
-	
+
 	@GetMapping(value = "/noticeOne")
 	public String noticeOne(Notice notice, Model model) {
 		
 		Notice noticeOne = noticeService.selectNoticeOne(notice);
 		model.addAttribute("noticeOne", noticeOne);
-		
 
-		
 		return "notice/noticeOne";
 	}
 	
-
-
 	@GetMapping(value = "/addNotice")
 	public String addNotice() {
 		
 		return "notice/addNotice";	// forward		
 	}
-	
-	
-	
-	
 	
 	
 	@PostMapping(value="/addNotice")

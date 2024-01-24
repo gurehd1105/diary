@@ -49,16 +49,12 @@ public class ScheduleController {
 								 Integer targetMonth, 
 								 Integer targetDay,	
 								 HttpSession session) {
-		Member loginMember = (Member)session.getAttribute("loginMember");
-		if(loginMember == null) {
-			//로그인 실패
-			return "redirect:/login";
-		}
-		
 		System.out.println(targetDay + "<-- targetDay");
-
-		Map<String, Object> paramMap = new HashMap<>();	
 		
+		// 로그인 정보 세팅	
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
+		Map<String, Object> paramMap = new HashMap<>();			
 		paramMap.put("targetYear", targetYear);
 		paramMap.put("targetMonth", targetMonth);
 		paramMap.put("targetDay", targetDay);
@@ -80,18 +76,17 @@ public class ScheduleController {
 	}
 		
 
-	/*
-	 *스케줄 검색
+	//스케줄 검색
 	@GetMapping("/scheduleListByWord")
 	public String scheduleListByWord(Model model, 
 									@RequestParam(name="word", defaultValue = "")String word) {
 	
-		List<Schedule> list = scheduleService.getScheduleListByWord(word);		
-		model.addAttribute("list", list);
-		
+		List<Schedule> list = scheduleService.selectScheduleListByWord(word);		
+		model.addAttribute("list", list);	
+		System.out.println(list + "<--list");
 		return "schedule/scheduleListByWord";
 		
 	}
-	*/
+	 
 }
 

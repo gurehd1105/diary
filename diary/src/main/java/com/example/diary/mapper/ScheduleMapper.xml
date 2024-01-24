@@ -38,8 +38,7 @@
 		FROM schedule
 	</select>
 
-
-<!--  
+<!-- 검색 -->
    <select id="selectScheduleListByWord" parameterType="String"
    		   resultType="com.example.diary.vo.Schedule">
    		SELECT 
@@ -53,7 +52,7 @@
    		  	</if>
    		  </where>
    		  LIMIT 0,10
-   </select>-->
+   </select>
    
    
    
@@ -82,7 +81,6 @@
       		 member_id memberId,
 			 schedule_date scheduleDate,
 			 schedule_memo scheduleMemo,
-			 schedule_emoji scheduleEmoji,
 			 createdate
 	    FROM schedule
 	   WHERE member_id = #{memberId}

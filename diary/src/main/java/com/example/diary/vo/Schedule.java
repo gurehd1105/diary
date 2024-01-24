@@ -8,6 +8,5 @@ public class Schedule {
 	private String memberId;
 	private String scheduleDate;
 	private String scheduleMemo;
-	private String scheduleEmoji;
 	private String createdate;
 }

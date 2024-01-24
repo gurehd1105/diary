@@ -10,7 +10,7 @@ import com.example.diary.vo.Schedule;
 public interface ScheduleMapper {
 	
 	//날짜 검색
-	
+	 
 	List<Schedule> selectScheduleListByDate(Map<String, Integer> map);
 	
 	Integer selectScheduleDateMaxYear();

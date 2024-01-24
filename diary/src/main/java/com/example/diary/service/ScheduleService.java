@@ -87,11 +87,19 @@ public class ScheduleService {
    public List<Schedule> getScheduleListByDay(Map<String, Object> paramMap) {
 	   List<Schedule> resultSchedule = new ArrayList<>();
 	   resultSchedule = scheduleMapper.selectScheduleListByDay(paramMap);
-	   return resultSchedule;
-	   
-	   
-	   
+	   return resultSchedule; 	   
    }
-     
-  
+   // 검색
+   public List<Schedule> selectScheduleListByWord(String word) {
+       return scheduleMapper.selectScheduleListByWord(word);
+    
+}
+   
+   
+   
+   
+   
+   
+   
+   
 }
